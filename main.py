@@ -34,3 +34,4 @@ v3 - куда держим путь
 """
 def GetWeight(v1, v2, v3):
     return Weight.get((v1, v2, v3), 0)
+
