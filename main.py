@@ -1,4 +1,3 @@
-import operator
 __author__ = 'Denis & Artem'
 
 
