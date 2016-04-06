@@ -1,4 +1,4 @@
-__author__ = 'Denis i Artem'
+__author__ = 'Denis & Artem'
 
 
 def LenV(v1, v2, Vertex):
