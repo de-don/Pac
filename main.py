@@ -1,4 +1,14 @@
 __author__ = 'Denis & Artem'
+import operator
+
+
+def max_width():
+    return max(Vertex.values(), key=operator.itemgetter(0))[0]
+
+
+def max_heigth():
+    return max(Vertex.values(), key=operator.itemgetter(1))[1]
+
 
 def LenV(v1, v2, Vertex):
     return int(((Vertex[v1][0]-Vertex[v2][0])**2+(Vertex[v1][1]-Vertex[v2][1])**2)**.5)

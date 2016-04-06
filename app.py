@@ -1,6 +1,6 @@
 import sys, random
 from PyQt4 import QtGui, QtCore
-import Pac_main as pm
+import main as pm
 
 
 class Example(QtGui.QWidget):
