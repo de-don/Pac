@@ -1,5 +1,6 @@
 __author__ = 'Denis'
 
+
 def LenV(v1, v2, Vertex):
     return int(((Vertex[v1][0]-Vertex[v2][0])**2+(Vertex[v1][1]-Vertex[v2][1])**2)**.5)
 
@@ -32,6 +33,9 @@ v2 - следующая вершина
 v3 - куда держим путь
 Значение словаря - float - вес
 """
+
+
 def GetWeight(v1, v2, v3):
     return Weight.get((v1, v2, v3), 0)
+
 
