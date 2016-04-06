@@ -1,4 +1,14 @@
 __author__ = 'Denis & Artem'
+import operator
+
+
+def max_width():
+    return max(Vertex.values(), key=operator.itemgetter(0))[0]
+
+
+def max_heigth():
+    return max(Vertex.values(), key=operator.itemgetter(1))[1]
+
 
 
 class City:
