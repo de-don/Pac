@@ -1,6 +1,6 @@
 import sys, random
 from PyQt4 import QtGui, QtCore
-import main as pm
+from main import City
 
 
 class Example(QtGui.QWidget):
@@ -8,12 +8,14 @@ class Example(QtGui.QWidget):
     scale = 0
     max_vert_h = 1
     max_vert_w = 1
+    city = None
 
     def __init__(self):
         super(Example, self).__init__()
+        self.city = City()
         self.initUI()
-        self.max_vert_h = pm.max_heigth()
-        self.max_vert_w = pm.max_width()
+        self.max_vert_h = self.city.max_heigth()
+        self.max_vert_w = self.city.max_width()
         self.set_scale()
         print(self.scale)
 
@@ -42,14 +44,14 @@ class Example(QtGui.QWidget):
         pen1.setColor(QtCore.Qt.blue)
         qp.setPen(pen0)
 
-        for k in pm.Vertex:
-            qp.drawPoint(pm.Vertex[k][0] * self.scale, pm.Vertex[k][1] * self.scale)
-            qp.drawText(pm.Vertex[k][0] * self.scale - 10, pm.Vertex[k][1] * self.scale - 10, k)
+        for k in self.city.Vertex:
+            qp.drawPoint(self.city.Vertex[k][0] * self.scale, self.city.Vertex[k][1] * self.scale)
+            qp.drawText(self.city.Vertex[k][0] * self.scale - 10, self.city.Vertex[k][1] * self.scale - 10, k)
         qp.setPen(pen1)
-        for k, v in pm.City.items():
-            x1, y1 = pm.Vertex[k]
+        for k, v in self.city.City.items():
+            x1, y1 = self.city.Vertex[k]
             for k2, d in v.items():
-                x2, y2 = pm.Vertex[k2]
+                x2, y2 = self.city.Vertex[k2]
                 qp.drawLine(x1 * self.scale, y1 * self.scale, x2 * self.scale, y2 * self.scale)
                 qp.drawText((x1 + x2) * self.scale / 2 + 10, (y1 + y2) * self.scale / 2 + 10, str(d))
 
