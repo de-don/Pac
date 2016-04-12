@@ -59,7 +59,6 @@ class City:
         if pFrom == pTo:
             return Way
 
-
         if pFrom is None:
             pFrom = self.Now
 
@@ -67,17 +66,15 @@ class City:
         #  Для каждой вершины вытаскиваем из базы вес
         arr = {k: self.GetWeight(pFrom, k, pTo) for k, _ in self.City[pFrom].items() if k not in Way}
 
-        #  Сортировка по значению с сохранением ключей
-        arr = sorted(arr.items(), key=operator.itemgetter(1), reverse=True)
-
         if not arr:
             return 0
+
+        #  Сортировка по значению с сохранением ключей
+        arr = sorted(arr.items(), key=operator.itemgetter(1), reverse=True)
 
         #  Если все элементы с нулевым весом - перемешиваем
         if arr[0][1] == 0:
             random.shuffle(arr)
-
-        print(arr)
 
         #  Идем в каждую вершину по порядку, рекурсией, пока не будет возвращено 1
         for k, _ in arr:
@@ -86,6 +83,10 @@ class City:
                 return W
         Way.pop()
         return 0
+
+    def UpdateWeight(self, Way):
+        pass
+
 
 #  для отладки
 if __name__ == '__main__':
