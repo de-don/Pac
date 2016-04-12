@@ -92,11 +92,21 @@ class City:
         return 0
 
     def UpdateWeight(self, Way):
-        pass
+        #  Обновляем веса
+        pTo = Way[-1]
+
+        for i in range(1, len(Way)):
+            k = (Way[i-1], Way[i], pTo)
+            v = self.Weight.get(k, 0)
+            v = [v*1.1, 1][v == 0]
+            self.Weight.update({k:v})
+
 
 
 #  для отладки
 if __name__ == '__main__':
+
     T = City()
     W = T.GoTo(pFrom="A", pTo="H")
+    T.UpdateWeight(W)
     print(W)
