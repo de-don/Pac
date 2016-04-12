@@ -107,6 +107,19 @@ class City:
 if __name__ == '__main__':
 
     T = City()
-    W = T.GoTo(pFrom="A", pTo="H")
-    T.UpdateWeight(W)
-    print(W)
+
+    max = len(T.Names)-1
+    r = random.randint(0, max)
+    Now = T.Names[r]
+
+    for i in range(1000):
+        r = random.randint(0, max)
+        To = T.Names[r]
+
+        if(Now != To):
+            W = T.GoTo(pFrom=Now, pTo=To, Way=[])
+            print(Now, "=>", To, W)
+            T.UpdateWeight(W)
+            Now = To
+
+    print(T.Weight)
