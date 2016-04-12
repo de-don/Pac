@@ -1,5 +1,7 @@
 import operator
+import random
 __author__ = 'Denis & Artem'
+
 
 class City:
 
@@ -9,6 +11,7 @@ class City:
     City = dict()  # Карта
     Names = list()  # Названия вернищ
     Weight = dict()  # переменная для хранения весов
+    Now = 0  # Текущее положение
     """
     Ключ словаря - кортеж (v1,v2,v3)
     v1 - наша текущая вершина
@@ -50,4 +53,42 @@ class City:
     def GetWeight(self, v1, v2, v3):
         return self.Weight.get((v1, v2, v3), 0)
 
+    def GoTo(self, pTo, pFrom=None, Way=[]):
+        Way.append(pFrom)
 
+        if pFrom == pTo:
+            return Way
+
+
+        if pFrom is None:
+            pFrom = self.Now
+
+        #  Берем все смежные вершины, и убираем из них уже посещенные
+        #  Для каждой вершины вытаскиваем из базы вес
+        arr = {k: self.GetWeight(pFrom, k, pTo) for k, _ in self.City[pFrom].items() if k not in Way}
+
+        #  Сортировка по значению с сохранением ключей
+        arr = sorted(arr.items(), key=operator.itemgetter(1), reverse=True)
+
+        if not arr:
+            return 0
+
+        #  Если все элементы с нулевым весом - перемешиваем
+        if arr[0][1] == 0:
+            random.shuffle(arr)
+
+        print(arr)
+
+        #  Идем в каждую вершину по порядку, рекурсией, пока не будет возвращено 1
+        for k, _ in arr:
+            W = self.GoTo(pTo, k, Way[:])
+            if W:
+                return W
+        Way.pop()
+        return 0
+
+#  для отладки
+if __name__ == '__main__':
+    T = City()
+    W = T.GoTo(pFrom="A", pTo="F")
+    print(W)
