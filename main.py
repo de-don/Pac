@@ -96,13 +96,15 @@ class City:
 
     def UpdateWeight(self, Way):
         #  Обновляем веса
-        pTo = Way[-1]
 
-        for i in range(1, len(Way)):
-            k = (Way[i-1], Way[i], pTo)
-            v = self.Weight.get(k, 0)
-            v = [v*1.1, 1][v == 0]
-            self.Weight.update({k:v})
+        for i in range(len(Way)-1):
+            pTo = Way[-i]
+
+            for i in range(1, len(Way)-i):
+                k = (Way[i-1], Way[i], pTo)
+                v = self.Weight.get(k, 0)
+                v = [v*1.1, 1][v == 0]
+                self.Weight.update({k:v})
 
 
 
