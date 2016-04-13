@@ -30,8 +30,8 @@ class City:
     def distance(self, v1, v2):
         return int(((self.Vertex[v1][0]-self.Vertex[v2][0])**2+(self.Vertex[v1][1]-self.Vertex[v2][1])**2)**.5)
 
-    def __init__(self):
-        file = [i.strip() for i in open("input.txt", "r")]
+    def __init__(self, fname="input_big_1.txt", rev=1):
+        file = [i.strip() for i in open(fname, "r")]
         self.N = int(file[0])
         self.M = int(file[self.N+1])
         self.Names = [s.split()[0] for s in file[1:1+self.N]]
@@ -47,6 +47,9 @@ class City:
         for i in range(self.N+2, self.N+2+self.M):
             v1, v2 = file[i].split()
             self.City[v1].update([(v2, self.distance(v1, v2))])
+            if rev:
+                self.City[v2].update([(v1, self.distance(v1, v2))])
+
 
         for k,v in self.City.items():
             print(k, v)
