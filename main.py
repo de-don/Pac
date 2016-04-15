@@ -12,7 +12,7 @@ class City:
     Names = list()  # Названия вернищ
     Weight = dict()  # переменная для хранения весов
     Now = 0  # Текущее положение
-    Lucky = 1/5  # удача (вероятность пойти по направлению)
+    Lucky = [5, 6]  # удача (вероятность пойти по направлению)
     """
     Ключ словаря - кортеж (v1,v2,v3)
     v1 - наша текущая вершина
@@ -81,7 +81,7 @@ class City:
             random.shuffle(arr)
 
         #  Если повезло - ориентируемся и идем в правильную сторону
-        if random.randint(1, int(1/self.Lucky)) == 1:
+        if random.randint(1, self.Lucky[1]) <= self.Lucky[0]:
             arr = {k: self.distance(k, pTo) for k, _ in arr}
             arr = sorted(arr.items(), key=operator.itemgetter(1))
 
