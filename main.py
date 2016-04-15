@@ -96,15 +96,26 @@ class City:
 
     def UpdateWeight(self, Way):
         #  Обновляем веса
-
+        t = []
+        N = len(Way)
+        #  Повышаем веса
         for i in range(len(Way)-1):
             pTo = Way[-i]
 
             for i in range(1, len(Way)-i):
                 k = (Way[i-1], Way[i], pTo)
+                t.append(k)
                 v = self.Weight.get(k, 0)
-                v = [v*1.1, 1][v == 0]
-                self.Weight.update({k:v})
+                v = [v*(1+1/N), 1][v == 0]
+                self.Weight.update({k: v})
+
+        #  Понижаем веса для не использованых путей
+        for k, v in self.Weight.items():
+            if i in t:
+                continue
+            self.Weight.update({k: v*(1-0.001*N)})
+
+
 
 
 
@@ -117,7 +128,7 @@ if __name__ == '__main__':
     r = random.randint(0, max)
     Now = T.Names[r]
 
-    for i in range(1000):
+    for i in range(10000):
         r = random.randint(0, max)
         To = T.Names[r]
 
