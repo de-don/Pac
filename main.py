@@ -1,5 +1,6 @@
 import operator
 import random
+import math
 __author__ = 'Denis & Artem'
 
 
@@ -28,7 +29,7 @@ class City:
         return max(self.Vertex.values(), key=operator.itemgetter(1))[1]
 
     def distance(self, v1, v2):
-        return int(((self.Vertex[v1][0]-self.Vertex[v2][0])**2+(self.Vertex[v1][1]-self.Vertex[v2][1])**2)**.5)
+        return int(math.hypot(self.Vertex[v1][0]-self.Vertex[v2][0], self.Vertex[v1][1]-self.Vertex[v2][1]))
 
     def __init__(self, fname="input_big_1.txt", rev=1):
         file = [i.strip() for i in open(fname, "r")]
